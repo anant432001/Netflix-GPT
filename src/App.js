@@ -1,7 +1,7 @@
-import "./App.css";
+import Body from "./components/Body";
 
 function App() {
-  return <div className="text-2xl bg-black text-white">Jai Bholenath!!</div>;
+  return <Body />;
 }
 
 export default App;

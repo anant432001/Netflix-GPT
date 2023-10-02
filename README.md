@@ -2,6 +2,8 @@
 
 - Create React App (npx create-react-app netflix-gpt)
 - Tailwind CSS (https://tailwindcss.com/docs/guides/create-react-app)
+- Header for Login component
+- Login Form
 
 # Features
 
