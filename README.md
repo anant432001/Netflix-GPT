@@ -3,8 +3,11 @@
 - Create React App (npx create-react-app netflix-gpt)
 - Tailwind CSS (https://tailwindcss.com/docs/guides/create-react-app)
 - Header for Login component
+- Routing the App
 - Login/SignIn Form
 - SignUp Form
+- Form Validation
+- useRef Hook
 
 # Features
 
