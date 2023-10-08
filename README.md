@@ -14,7 +14,6 @@
 - Implement SignIn user API
 - Created Redux store with userSlice
 
-
 # Features
 
 - Login/SignUp

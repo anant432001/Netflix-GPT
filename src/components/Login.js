@@ -1,10 +1,15 @@
 import React, { useRef, useState } from "react";
 import Header from "./Header";
 import { checkValidData } from "../utils/validate";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 import { auth } from "../utils/firebase";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const navigate = useNavigate();
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [isValid, setIsValid] = useState();
 
@@ -16,12 +21,18 @@ const Login = () => {
     // Validate the form data
     const message = checkValidData(password.current.value);
     if (isSignInForm) {
+      // LogIn/SignIn
       setIsValid(message);
       if (message) {
-        signInWithEmailAndPassword(auth, email.current.value, password.current.value)
+        signInWithEmailAndPassword(
+          auth,
+          email.current.value,
+          password.current.value
+        )
           .then((userCredential) => {
             // Signed in
             const user = userCredential.user;
+            navigate("/browse");
             console.log(user);
           })
           .catch((error) => {
@@ -31,12 +42,13 @@ const Login = () => {
           });
       }
     } else {
-      if (name.current.value == "") {
+      // SignUp
+      if (name.current.value === "") {
         setIsValid("Invalid Name");
         return;
       }
       setIsValid(message);
-      if (message) {
+      if (message === true) {
         // Create a new user
         createUserWithEmailAndPassword(
           auth,
@@ -46,7 +58,7 @@ const Login = () => {
           .then((userCredential) => {
             // Signed up
             const user = userCredential.user;
-            console.log(user);
+            navigate("/browse");
           })
           .catch((error) => {
             const errorCode = error.code;
@@ -67,7 +79,7 @@ const Login = () => {
       <div className="absolute">
         <img src="https://assets.nflxext.com/ffe/siteui/vlv3/9db4a880-3034-4e98-bdea-5d983e86bf52/b5953637-091d-4e02-9754-2bfadc8a8f7c/IN-en-20230925-popsignuptwoweeks-perspective_alpha_website_large.jpg" />
       </div>
-      <form
+      <div
         onSubmit={(e) => e.preventDefault()}
         className="w-1/3 absolute p-12 bg-black my-36 mx-auto right-0 left-0 text-white rounded-md bg-opacity-80">
         <h1 className="font-bold text-4xl py-4">
@@ -107,7 +119,7 @@ const Login = () => {
             {isSignInForm ? "Sign up now." : "Sign In now."}
           </span>
         </p>
-      </form>
+      </div>
     </div>
   );
 };
